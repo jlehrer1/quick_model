@@ -12,4 +12,4 @@ Where `params file` is a file containing your Google Custom Search API Key and C
 <CX>
 ```
 
-
+Outputs a saved `.tf` model into `models/`
