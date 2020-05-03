@@ -13,3 +13,5 @@ Where `params file` is a file containing your Google Custom Search API Key and C
 ```
 
 Outputs a saved `.tf` model into `models/`
+
+TODO: Add data augmentation to increase score
