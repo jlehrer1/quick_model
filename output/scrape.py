@@ -5,13 +5,15 @@ import urllib.request
 import os
 
 def generate_dataset(params_file, search_term, write_location):
-    if os.path.isdir(write_location) == False:
+    path = write_location + '/{}/'.format(search_term)
+    if os.path.isdir(path) == False:
         try:
-            os.mkdir(write_location)
+            print(path)
+            os.makedirs(path)
         except OSError:
             print('Attempt to make data directory failed...')
     try:
-        params = open(write_location)
+        params = open(params_file)
     except FileNotFoundError:
          print('params file not found')
     
@@ -35,7 +37,7 @@ def generate_dataset(params_file, search_term, write_location):
         else:
             for j, responses in tqdm.tqdm(enumerate(response.json()['items'])):
                 try:
-                    urllib.request.urlretrieve(responses['link'], write_location + '/{}{}.png'.format(i,j))
+                    urllib.request.urlretrieve(responses['link'], path + '/{}{}.png'.format(i,j))
                 except:
                     continue
     
