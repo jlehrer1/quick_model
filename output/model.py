@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
     train_generator = image_generator.flow_from_directory(directory=sys.argv[3],
                                                         target_size=(IMG_HEIGHT, IMG_WIDTH),
-                                                        classes = [sys.argv[2]], #should come from script parameter
+                                                        classes = [sys.argv[2]], 
                                                         subset='training') 
     validation_generator = image_generator.flow_from_directory(directory=sys.argv[3],
                                                             target_size=(IMG_HEIGHT, IMG_WIDTH),
