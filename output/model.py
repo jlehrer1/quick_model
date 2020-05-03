@@ -65,8 +65,10 @@ if __name__ == '__main__':
         validation_steps = validation_generator.samples // BATCH_SIZE,
         epochs = 3
     )
-
-    os.makedirs('models/')
+    try:
+        os.makedirs('models/')
+    except FileExistsError:
+        print('Directory exists, writing...')
     model.save('models/', overwrite = False, save_format = 'tf')
 
 
