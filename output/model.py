@@ -1,6 +1,7 @@
 import tensorflow as tf
 from tensorflow import keras 
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
+from tensorflow.keras.models import load_model
 import numpy as np
 import matplotlib.pyplot as plt
 import os, sys
@@ -16,7 +17,7 @@ BATCH_SIZE=20
 
 if __name__ == '__main__':
     if len(sys.argv) != 4:
-        print('Use case: scrape.py <params file> <search term> <write location>')
+        print('Use case: {} <params file> <search term> <write location>'.format(sys.argv[0]))
         quit()
     
     
@@ -65,5 +66,7 @@ if __name__ == '__main__':
         epochs = 3
     )
 
-    
+    os.makedirs('models/')
+    model.save('models/', overwrite = False, save_format = 'tf')
+
 
