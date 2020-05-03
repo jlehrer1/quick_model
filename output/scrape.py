@@ -4,6 +4,8 @@ import tqdm
 import urllib.request
 import os
 
+# To be used in model.py. Generates an image dataset where the directory name is the name of the search term, as specified
+# by tf.keras documentation
 def generate_dataset(params_file, search_term, write_location):
     path = write_location + '/{}/'.format(search_term) #path to data folder
     if os.path.isdir(path) == False:
@@ -20,7 +22,7 @@ def generate_dataset(params_file, search_term, write_location):
     
     key = params.readline().rstrip()
     cx = params.readline().rstrip()
-    
+
     for i in tqdm.tqdm(range(1,11)):
         params = {
             ('key', key),
