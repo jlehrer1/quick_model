@@ -8,12 +8,13 @@ import os
 # by tf.keras documentation
 def generate_dataset(params_file, search_term, write_location):
     path = write_location + '/{}/'.format(search_term) #path to data folder
-    if os.path.isdir(path) == False:
+    other_path = write_location + '/NOT-{}/'.format(search_term)
+    if not os.path.isdir(path) or not os.path.isdir(other_path):
         try:
-            print(path)
             os.makedirs(path)
+            os.makedirs(other_path)
         except OSError:
-            print('Attempt to make data directory failed...')
+            print('Attempt to make data directories failed...')
 
     try:
         params = open(params_file)
@@ -43,4 +44,8 @@ def generate_dataset(params_file, search_term, write_location):
                     urllib.request.urlretrieve(responses['link'], path + '/{}{}.png'.format(i,j))
                 except:
                     continue
-    
+    for i in tqdm.tqdm(range(100)):
+        try:
+            urllib.request.urlretrieve('https://picsum.photos/256', other_path + '/NOT-{}.png'.format(i))
+        except:
+            continue

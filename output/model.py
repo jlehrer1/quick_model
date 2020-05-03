@@ -23,6 +23,7 @@ if __name__ == '__main__':
 
     # preprocess data
     preprocessing.preprocess_dataset(sys.argv[3] + '/{}'.format(sys.argv[2]))
+    preprocessing.preprocess_dataset(sys.argv[3] + '/NOT-{}'.format(sys.argv[2]))
 
     # define datasets 
     image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255, validation_split=0.3)
@@ -37,4 +38,4 @@ if __name__ == '__main__':
                                                             subset='validation')
 
     # define model
-    
+
