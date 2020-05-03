@@ -22,8 +22,8 @@ if __name__ == '__main__':
     scrape.generate_dataset(sys.argv[1], sys.argv[2], sys.argv[3])
 
     # preprocess data
-    preprocessing.preprocess_dataset(sys.argv[3] + '/{}'.format(sys.argv[2]))
-    preprocessing.preprocess_dataset(sys.argv[3] + '/NOT-{}'.format(sys.argv[2]))
+    preprocessing.preprocess_dataset(sys.argv[3] + '/{}'.format(sys.argv[2]), IMG_WIDTH, IMG_HEIGHT)
+    preprocessing.preprocess_dataset(sys.argv[3] + '/NOT-{}'.format(sys.argv[2]), IMG_WIDTH, IMG_HEIGHT)
 
     # define datasets 
     image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255, validation_split=0.3)
