@@ -6,11 +6,13 @@ import matplotlib.pyplot as plt
 import os, sys
 from tqdm import tqdm 
 from sklearn.model_selection import KFold
+
 import scrape, preprocessing
 
-# defined by image preprocessing
+# Size of images to be fed into CNN
 IMG_HEIGHT = 256
 IMG_WIDTH = 256
+BATCH_SIZE=20
 
 if __name__ == '__main__':
     if len(sys.argv) != 4:
@@ -38,4 +40,30 @@ if __name__ == '__main__':
                                                             subset='validation')
 
     # define model
+    model = keras.models.Sequential([
+        Conv2D(16, 3, padding='same', activation='relu'),
+        MaxPooling2D(),
+        Conv2D(32, 3, padding='same', activation='relu'),
+        MaxPooling2D(),
+        Conv2D(64, 3, padding='same', activation='relu'),
+        MaxPooling2D(),
+        Flatten(),
+        Dense(512, activation='relu'),
+        Dense(1)
+    ])
+
+    model.compile(optimizer='rmsprop',
+                loss='binary_crossentropy',
+                metrics=['accuracy'])
+    
+    # train model
+    model.fit_generator(
+        train_generator,
+        steps_per_epoch = train_generator.samples // BATCH_SIZE,
+        validation_data = validation_generator, 
+        validation_steps = validation_generator.samples // BATCH_SIZE,
+        epochs = 3
+    )
+
+    
 
