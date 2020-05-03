@@ -1,25 +1,26 @@
-import requests, sys, getopt
+import requests, sys
 import json 
 import tqdm 
 import urllib.request
 import os
 
 def generate_dataset(params_file, search_term, write_location):
-    path = write_location + '/{}/'.format(search_term)
+    path = write_location + '/{}/'.format(search_term) #path to data folder
     if os.path.isdir(path) == False:
         try:
             print(path)
             os.makedirs(path)
         except OSError:
             print('Attempt to make data directory failed...')
+
     try:
         params = open(params_file)
     except FileNotFoundError:
-         print('params file not found')
+         print('Params file not found')
     
     key = params.readline().rstrip()
     cx = params.readline().rstrip()
-
+    
     for i in tqdm.tqdm(range(1,11)):
         params = {
             ('key', key),
@@ -32,7 +33,7 @@ def generate_dataset(params_file, search_term, write_location):
         }
         response = requests.get('https://www.googleapis.com/customsearch/v1?', params=params)
         if response.status_code >= 400:
-            print('API error: {}'.format(str(response.status_code)))
+            print('Google CSE API error: {}'.format(str(response.status_code)))
             quit()
         else:
             for j, responses in tqdm.tqdm(enumerate(response.json()['items'])):
