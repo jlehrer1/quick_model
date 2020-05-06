@@ -63,12 +63,13 @@ if __name__ == '__main__':
         steps_per_epoch = train_generator.samples // BATCH_SIZE,
         validation_data = validation_generator, 
         validation_steps = validation_generator.samples // BATCH_SIZE,
-        epochs = 3
+        epochs = 4,
     )
     try:
         os.makedirs('models/')
     except FileExistsError:
-        print('Directory exists, writing...')
+        print('Directory exists, continuing...')
+        
     model.save('models/', overwrite = False, save_format = 'tf')
 
 
