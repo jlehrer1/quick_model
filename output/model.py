@@ -2,6 +2,7 @@ import tensorflow as tf
 from tensorflow import keras 
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 from tensorflow.keras.models import load_model
+from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.optimizers import SGD
 import numpy as np
 import matplotlib.pyplot as plt
@@ -67,9 +68,11 @@ if __name__ == '__main__':
         steps_per_epoch = train_generator.samples // BATCH_SIZE,
         validation_data = validation_generator, 
         validation_steps = validation_generator.samples // BATCH_SIZE,
-        epochs = 5,
+        epochs = 30,
+        callbacks= [EarlyStopping(monitor='val_loss', patience=4)],
     )
 
+    # save to folder
     try:
         os.makedirs('models/')
     except FileExistsError:
