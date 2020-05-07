@@ -22,7 +22,6 @@ if __name__ == '__main__':
         print('Use case: {} <params file> <search term> <write location>'.format(sys.argv[0]))
         quit()
     
-    
     # generate dataset for training
     scrape.generate_dataset(sys.argv[1], sys.argv[2], sys.argv[3])
 
@@ -48,12 +47,12 @@ if __name__ == '__main__':
         MaxPooling2D(),
         Conv2D(64, 3, padding='same', activation='relu'),
         MaxPooling2D(),
-        Conv2D(128, 3, padding='same', activation='relu'),
+        Conv2D(64, 3, padding='same', activation='relu'),
         MaxPooling2D(),
         Conv2D(32, 2, padding='same', activation='relu'),
         MaxPooling2D(),
         Flatten(),
-        Dense(512, activation='relu'),
+        Dense(256, activation='relu'),
         Dense(1, activation='sigmoid')
     ])
 
