@@ -2,6 +2,7 @@ import tensorflow as tf
 from tensorflow import keras 
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 from tensorflow.keras.models import load_model
+from tensorflow.keras.optimizers import SGD
 import numpy as np
 import matplotlib.pyplot as plt
 import os, sys
@@ -42,18 +43,21 @@ if __name__ == '__main__':
 
     # define model
     model = keras.models.Sequential([
-        Conv2D(16, 3, padding='same', activation='relu'),
-        MaxPooling2D(),
         Conv2D(32, 3, padding='same', activation='relu'),
         MaxPooling2D(),
         Conv2D(64, 3, padding='same', activation='relu'),
         MaxPooling2D(),
+        Conv2D(128, 3, padding='same', activation='relu'),
+        MaxPooling2D(),
+        Conv2D(32, 2, padding='same', activation='relu'),
+        MaxPooling2D(),
         Flatten(),
         Dense(512, activation='relu'),
-        Dense(1)
+        Dense(1, activation='sigmoid')
     ])
 
-    model.compile(optimizer='rmsprop',
+    opt = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+    model.compile(optimizer=opt,
                 loss='binary_crossentropy',
                 metrics=['accuracy'])
     
@@ -63,8 +67,9 @@ if __name__ == '__main__':
         steps_per_epoch = train_generator.samples // BATCH_SIZE,
         validation_data = validation_generator, 
         validation_steps = validation_generator.samples // BATCH_SIZE,
-        epochs = 4,
+        epochs = 5,
     )
+
     try:
         os.makedirs('models/')
     except FileExistsError:
