@@ -4,18 +4,19 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 from tensorflow.keras.models import load_model
 from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.optimizers import SGD
+
 import numpy as np
 import matplotlib.pyplot as plt
-import os, sys
-from tqdm import tqdm 
 from sklearn.model_selection import KFold
-
 import scrape, preprocessing
+
+import os, sys
+from tqdm import tqdm
 
 # Size of images to be fed into CNN
 IMG_HEIGHT = 256
 IMG_WIDTH = 256
-BATCH_SIZE=20
+BATCH_SIZE = 20
 
 if __name__ == '__main__':
     if len(sys.argv) != 4:
@@ -77,6 +78,6 @@ if __name__ == '__main__':
     except FileExistsError:
         print('Directory exists, continuing...')
         
-    model.save('models/', overwrite = False, save_format = 'tf')
+    model.save('models/', overwrite = True, save_format = 'tf')
 
 
