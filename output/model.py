@@ -20,7 +20,7 @@ BATCH_SIZE = 20
 
 if __name__ == '__main__':
     if len(sys.argv) != 4:
-        print('Use case: {} <params file> <search term> <write location>'.format(sys.argv[0]))
+        print('Use case: {} <params file> <search term> <model write location>'.format(sys.argv[0]))
         quit()
     
     try:
@@ -32,9 +32,9 @@ if __name__ == '__main__':
     scrape.generate_dataset(sys.argv[1], sys.argv[2], '../data/')
 
     # preprocess data
-    preprocessing.preprocess_dataset(sys.argv[3] + '../data/{}'.format(sys.argv[2]), IMG_WIDTH, IMG_HEIGHT)
-    preprocessing.preprocess_dataset(sys.argv[3] + '../data/NOT-{}'.format(sys.argv[2]), IMG_WIDTH, IMG_HEIGHT)
-    
+    preprocessing.preprocess_dataset('../data/{}'.format(sys.argv[2]), IMG_WIDTH, IMG_HEIGHT)
+    preprocessing.preprocess_dataset('../data/NOT-{}'.format(sys.argv[2]), IMG_WIDTH, IMG_HEIGHT)
+
     # define datasets 
     image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255, validation_split=0.3)
 
