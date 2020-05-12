@@ -37,7 +37,10 @@ if __name__ == '__main__':
     preprocessing.preprocess_dataset(os.path.join(data_path, 'NOT-{}'.format(sys.argv[2])), IMG_WIDTH, IMG_HEIGHT)
 
     # define datasets 
-    image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255, validation_split=0.3)
+    image_generator = tf.keras.preprocessing.image.ImageDataGenerator(
+        rescale=1./255, 
+        validation_split=0.3
+    )
 
     train_generator = image_generator.flow_from_directory(directory=data_path,
                                                         target_size=(IMG_HEIGHT, IMG_WIDTH),
@@ -71,9 +74,9 @@ if __name__ == '__main__':
     # train model
     model.fit(
         train_generator,
-        steps_per_epoch = train_generator.samples // BATCH_SIZE,
+        # steps_per_epoch = train_generator.samples // BATCH_SIZE,
         validation_data = validation_generator, 
-        validation_steps = validation_generator.samples // BATCH_SIZE,
+        # validation_steps = validation_generator.samples // BATCH_SIZE,
         epochs = 30,
         callbacks= [EarlyStopping(monitor='val_loss', patience=2)],
     )
