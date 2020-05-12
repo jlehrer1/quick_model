@@ -8,6 +8,12 @@ import os, sys
 # To be used in model.py. Generates an image dataset where the directory name is the name of the search term, as specified
 # by tf.keras documentation
 def generate_dataset(params_file, search_term, write_location):
+    """Generate the dataset for the classifier:
+        Usage:
+        params_file: .txt file with Google CSE key and cx
+        search_term: term to image scrape
+        write_location: path to generate image folders
+    """
     path = os.path.join(write_location, search_term) #path to data folder
     other_path = os.path.join(write_location, 'NOT-' + search_term)
 
