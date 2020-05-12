@@ -5,4 +5,4 @@ data/*
 */.ipynb_checkpoints
 output/__pycache__
 params.txt
-output/models/ 
+output/model/*/ 
