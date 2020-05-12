@@ -8,7 +8,7 @@ pip install -r requirements.txt
 
 Usage:
 ```
-model.py <params file> <search term> <write location>
+model.py <params file> <search term> <model write location>
 ```
 
 Where `params file` is a file containing your Google Custom Search API Key and CX as so:
@@ -17,4 +17,4 @@ Where `params file` is a file containing your Google Custom Search API Key and C
 <CX>
 ```
 
-Outputs a saved `.tf` model into `models/`
+Outputs a saved `.tf` model into `model/`
