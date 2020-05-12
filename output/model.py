@@ -69,7 +69,7 @@ if __name__ == '__main__':
                 metrics=['accuracy'])
     
     # train model
-    model.fit_generator(
+    model.fit(
         train_generator,
         steps_per_epoch = train_generator.samples // BATCH_SIZE,
         validation_data = validation_generator, 
