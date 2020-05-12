@@ -23,13 +23,18 @@ if __name__ == '__main__':
         print('Use case: {} <params file> <search term> <write location>'.format(sys.argv[0]))
         quit()
     
+    try:
+        os.makedirs('../data')
+    except FileExistsError:
+        tqdm.write('data directory exists, continuing...')
+
     # generate dataset for training
-    scrape.generate_dataset(sys.argv[1], sys.argv[2], sys.argv[3])
+    scrape.generate_dataset(sys.argv[1], sys.argv[2], '../data/')
 
     # preprocess data
-    preprocessing.preprocess_dataset(sys.argv[3] + '/{}'.format(sys.argv[2]), IMG_WIDTH, IMG_HEIGHT)
-    preprocessing.preprocess_dataset(sys.argv[3] + '/NOT-{}'.format(sys.argv[2]), IMG_WIDTH, IMG_HEIGHT)
-
+    preprocessing.preprocess_dataset(sys.argv[3] + '../data/{}'.format(sys.argv[2]), IMG_WIDTH, IMG_HEIGHT)
+    preprocessing.preprocess_dataset(sys.argv[3] + '../data/NOT-{}'.format(sys.argv[2]), IMG_WIDTH, IMG_HEIGHT)
+    
     # define datasets 
     image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255, validation_split=0.3)
 
@@ -69,14 +74,14 @@ if __name__ == '__main__':
         validation_data = validation_generator, 
         validation_steps = validation_generator.samples // BATCH_SIZE,
         epochs = 30,
-        callbacks= [EarlyStopping(monitor='val_loss', patience=4)],
+        callbacks= [EarlyStopping(monitor='val_loss', patience=2)],
     )
 
     # save to folder
     try:
         os.makedirs('models/')
     except FileExistsError:
-        print('Directory exists, continuing...')
+        tqdm.write('Directory exists, continuing...')
         
     model.save('models/', overwrite = True, save_format = 'tf')
 
