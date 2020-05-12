@@ -1,6 +1,11 @@
 # Quick Model
 Run from the command line and recieve a saved Tensorflow CNN trained to detect images of the object of your choice!
 
+To make sure you have all required libraries, run 
+```
+pip install -r requirements.txt
+```
+
 Usage:
 ```
 model.py <params file> <search term> <write location>
