@@ -1,4 +1,7 @@
+# params.txt contains my Google CSE key and cx
 .DS_Store
 */.DS_Store
 data/*
 */.ipynb_checkpoints
+output/__pycache__
+params.txt 
