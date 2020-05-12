@@ -6,7 +6,6 @@ from PIL import Image
 
 def preprocess_dataset(class_directory, IMG_WIDTH, IMG_HEIGTH):
     tqdm.write('Preprocessing images in {}'.format(class_directory))
-    num_files = len(os.listdir(class_directory))
     for file in tqdm(os.listdir(class_directory)):
         try:
             img = Image.open(class_directory + '/{}'.format(file))
