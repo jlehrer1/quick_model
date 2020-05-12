@@ -5,7 +5,7 @@ from PIL import Image
 # Reshapes the images to be fed into the CNN. 
 
 def preprocess_dataset(class_directory, IMG_WIDTH, IMG_HEIGTH):
-    tqdm.tqdm.write('Preprocessing images in {}'.format(class_directory))
+    tqdm.write('Preprocessing images in {}'.format(class_directory))
     num_files = len(os.listdir(class_directory))
     for file in tqdm(os.listdir(class_directory)):
         try:
