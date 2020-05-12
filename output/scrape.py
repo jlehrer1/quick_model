@@ -1,8 +1,9 @@
-import requests, sys
+import requests
 import json 
-from tqdm import tqdm 
 import urllib.request
-import os
+from tqdm import tqdm 
+
+import os, sys
 
 # To be used in model.py. Generates an image dataset where the directory name is the name of the search term, as specified
 # by tf.keras documentation
