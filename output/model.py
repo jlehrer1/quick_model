@@ -23,7 +23,7 @@ if __name__ == '__main__':
         print('Use case: {} <params file> <search term> <model write location>'.format(sys.argv[0]))
         quit()
 
-    data_path = os.join('..', '/data')
+    data_path = os.path.join('..', 'data')
     try:
         os.makedirs(data_path)
     except FileExistsError:
@@ -33,19 +33,19 @@ if __name__ == '__main__':
     scrape.generate_dataset(sys.argv[1], sys.argv[2], data_path)
 
     # preprocess data
-    preprocessing.preprocess_dataset('../data/{}'.format(sys.argv[2]), IMG_WIDTH, IMG_HEIGHT)
-    preprocessing.preprocess_dataset('../data/NOT-{}'.format(sys.argv[2]), IMG_WIDTH, IMG_HEIGHT)
+    preprocessing.preprocess_dataset(os.path.join(data_path, sys.argv[2]), IMG_WIDTH, IMG_HEIGHT)
+    preprocessing.preprocess_dataset(os.path.join(data_path, 'NOT-{}'.format(sys.argv[2])), IMG_WIDTH, IMG_HEIGHT)
 
     # define datasets 
     image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255, validation_split=0.3)
 
     train_generator = image_generator.flow_from_directory(directory=data_path,
                                                         target_size=(IMG_HEIGHT, IMG_WIDTH),
-                                                        classes = [sys.argv[2]], 
+                                                        classes=[sys.argv[2], 'NOT-{}'.format[sys.argv[2]]], 
                                                         subset='training') 
     validation_generator = image_generator.flow_from_directory(directory=data_path,
                                                             target_size=(IMG_HEIGHT, IMG_WIDTH),
-                                                            classes= [sys.argv[2]],
+                                                            classes=[sys.argv[2], 'NOT-{}'.format[sys.argv[2]]],
                                                             subset='validation')
 
     # define model
