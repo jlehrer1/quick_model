@@ -22,14 +22,15 @@ if __name__ == '__main__':
     if len(sys.argv) != 4:
         print('Use case: {} <params file> <search term> <model write location>'.format(sys.argv[0]))
         quit()
-    
+
+    data_path = os.join('..', '/data')
     try:
-        os.makedirs('../data')
+        os.makedirs(data_path)
     except FileExistsError:
         tqdm.write('data directory exists, continuing...')
 
     # generate dataset for training
-    scrape.generate_dataset(sys.argv[1], sys.argv[2], '../data/')
+    scrape.generate_dataset(sys.argv[1], sys.argv[2], data_path)
 
     # preprocess data
     preprocessing.preprocess_dataset('../data/{}'.format(sys.argv[2]), IMG_WIDTH, IMG_HEIGHT)
@@ -38,11 +39,11 @@ if __name__ == '__main__':
     # define datasets 
     image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255, validation_split=0.3)
 
-    train_generator = image_generator.flow_from_directory(directory=sys.argv[3],
+    train_generator = image_generator.flow_from_directory(directory=data_path,
                                                         target_size=(IMG_HEIGHT, IMG_WIDTH),
                                                         classes = [sys.argv[2]], 
                                                         subset='training') 
-    validation_generator = image_generator.flow_from_directory(directory=sys.argv[3],
+    validation_generator = image_generator.flow_from_directory(directory=data_path,
                                                             target_size=(IMG_HEIGHT, IMG_WIDTH),
                                                             classes= [sys.argv[2]],
                                                             subset='validation')
