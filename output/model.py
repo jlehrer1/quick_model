@@ -83,10 +83,10 @@ if __name__ == '__main__':
 
     # save to folder
     try:
-        os.makedirs('models/')
+        os.makedirs('model')
     except FileExistsError:
         tqdm.write('Directory exists, continuing...')
         
-    model.save('models/', overwrite = True, save_format = 'tf')
+    model.save('model', overwrite = True, save_format = 'tf')
 
 
