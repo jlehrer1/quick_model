@@ -41,11 +41,11 @@ if __name__ == '__main__':
 
     train_generator = image_generator.flow_from_directory(directory=data_path,
                                                         target_size=(IMG_HEIGHT, IMG_WIDTH),
-                                                        classes=[sys.argv[2], 'NOT-{}'.format[sys.argv[2]]], 
+                                                        classes=[sys.argv[2], 'NOT-{}'.format(sys.argv[2])],
                                                         subset='training') 
     validation_generator = image_generator.flow_from_directory(directory=data_path,
                                                             target_size=(IMG_HEIGHT, IMG_WIDTH),
-                                                            classes=[sys.argv[2], 'NOT-{}'.format[sys.argv[2]]],
+                                                            classes=[sys.argv[2], 'NOT-{}'.format(sys.argv[2])],
                                                             subset='validation')
 
     # define model
