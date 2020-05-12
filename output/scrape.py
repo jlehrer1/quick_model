@@ -1,6 +1,6 @@
 import requests, sys
 import json 
-import tqdm 
+from tqdm import tqdm 
 import urllib.request
 import os
 
@@ -13,12 +13,12 @@ def generate_dataset(params_file, search_term, write_location):
     try:
         os.makedirs(path)
     except FileExistsError:
-        tqdm.tqdm.write('Directory {} exists, continuing...'.format(path))
+        tqdm.write('Directory {} exists, continuing...'.format(path))
 
     try:
         os.makedirs(other_path)
     except FileExistsError:
-        tqdm.tqdm.write('Directory {} exists, continuing...'.format(other_path))
+        tqdm.write('Directory {} exists, continuing...'.format(other_path))
 
     try:
         params = open(params_file)
@@ -28,8 +28,8 @@ def generate_dataset(params_file, search_term, write_location):
     key = params.readline().rstrip()
     cx = params.readline().rstrip()
 
-    tqdm.tqdm.write('Scraping {} images...'.format(search_term))
-    for i in tqdm.tqdm(range(1,11)):
+    tqdm.write('Scraping {} images...'.format(search_term))
+    for i in tqdm(range(1,11)):
         params = {
             ('key', key),
             ('cx', cx),
@@ -44,14 +44,14 @@ def generate_dataset(params_file, search_term, write_location):
             print('Google CSE API error: {}'.format(response.text))
             quit()
         else:
-            for j, responses in tqdm.tqdm(enumerate(response.json()['items'])):
+            for j, responses in tqdm(enumerate(response.json()['items'])):
                 try:
                     urllib.request.urlretrieve(responses['link'], path + '/{}{}.png'.format(i,j))
                 except:
                     continue
 
-    tqdm.tqdm.write('Scraping random images...')
-    for i in tqdm.tqdm(range(100)):
+    tqdm.write('Scraping random images...')
+    for i in tqdm(range(100)):
         try:
             urllib.request.urlretrieve('https://picsum.photos/256', other_path + '/NOT-{}.png'.format(i))
         except:
