@@ -39,17 +39,20 @@ if __name__ == '__main__':
     # define datasets 
     image_generator = tf.keras.preprocessing.image.ImageDataGenerator(
         rescale=1./255, 
-        validation_split=0.3
+        validation_split=0.3,
     )
 
     train_generator = image_generator.flow_from_directory(directory=data_path,
                                                         target_size=(IMG_HEIGHT, IMG_WIDTH),
                                                         classes=[sys.argv[2], 'NOT-{}'.format(sys.argv[2])],
-                                                        subset='training') 
+                                                        subset='training',
+                                                        shuffle=True)
+
     validation_generator = image_generator.flow_from_directory(directory=data_path,
                                                             target_size=(IMG_HEIGHT, IMG_WIDTH),
                                                             classes=[sys.argv[2], 'NOT-{}'.format(sys.argv[2])],
-                                                            subset='validation')
+                                                            subset='validation',
+                                                            shuffle=True)
 
     # define model
     model = keras.models.Sequential([
