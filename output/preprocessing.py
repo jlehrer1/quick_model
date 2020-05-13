@@ -1,8 +1,9 @@
 import os
-from tqdm import tqdm 
+from tqdm import tqdm
 from PIL import Image
 
-# Reshapes the images to be fed into the CNN. 
+# Reshapes the images to be fed into the CNN.
+
 
 def preprocess_dataset(class_directory, IMG_WIDTH, IMG_HEIGTH):
     """Preprocesses images for use in the classifier
