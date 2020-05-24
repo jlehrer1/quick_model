@@ -6,7 +6,6 @@ from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.optimizers import SGD
 
 import numpy as np
-import matplotlib.pyplot as plt
 from sklearn.model_selection import KFold
 import scrape
 import preprocessing
