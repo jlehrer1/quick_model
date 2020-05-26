@@ -1,4 +1,5 @@
 import tkinter as tk 
+from tkinter import filedialog #use to open file path for required files
 
 class Application(tk.Frame):
     def __init__(self, parent=None):
@@ -10,7 +11,7 @@ class Application(tk.Frame):
 
         self.entry = tk.Entry(self.parent)
         self.train_model(self.entry.get())
-
+        
 
     def train_model(self, text: str):
         if text == None or text.strip() == '':
