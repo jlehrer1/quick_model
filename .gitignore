@@ -6,3 +6,5 @@ data/*
 output/__pycache__
 params.txt
 output/model/*/ 
+.vscode/
+
