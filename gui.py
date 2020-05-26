@@ -5,15 +5,18 @@ class Application(tk.Frame):
         self.parent = parent
         self.parent.title('Quick CNN')
         self.parent.geometry('500x600')
-        self.label = tk.Label(parent, text='Enter your search term: ')
+        self.label = tk.Label(self.parent, text='Enter your search term: ')
         self.label.pack()
 
-    def create_widgets(self):
-        text = tk.Label(
-            self,
-        )
-        self.pack()
+        self.entry = tk.Entry(self.parent)
+        self.train_model(self.entry.get())
 
+
+    def train_model(self, text: str):
+        if text == None or text.strip() == '':
+            return
+        
+        
 if __name__ == "__main__":
     root = tk.Tk()
     app = Application(parent=root)
