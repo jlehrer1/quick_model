@@ -6,6 +6,11 @@ To make sure you have all required libraries, run
 pip install -r requirements.txt
 ```
 
+Or to set up the development environment, 
+```
+conda env create --file environment.yml
+```
+
 Usage:
 ```
 model.py <params file> <search term> <model write location>
